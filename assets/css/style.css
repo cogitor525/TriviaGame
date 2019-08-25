@@ -35,8 +35,16 @@ main {
     background-color: rgba(0,100,0,0.33);
 }
 
+.hidden {
+    visibility: hidden;
+}
+
 #question {
+    background-color: rgba(0,128,0,0.25);
     color: white;
+    border: 1px solid green;
+    margin-left: 160px;
+    margin-right: 160px;
     margin-bottom: 25px;
 }
 
