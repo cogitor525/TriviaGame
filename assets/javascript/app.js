@@ -2,8 +2,8 @@
 
 
 // these define duration of game timeouts
-const qTimeout = 10000;
-const qInterval = 3000;
+const qTimeout = 10;  // 10 seconds
+const qInterval = 3;  // 3 seconds
 
 // these variables track the player's score/record
 let countCorrect;
@@ -24,6 +24,7 @@ const imageUrlSet = {
     q10: "",
 };
 
+let questionIndex;
 const questionArray = [];
 // questionArray will be array of objects with following structure:
 
@@ -75,17 +76,78 @@ function initializeGame() {
     countCorrect = 0;
     countWrong = 0;
     countTimeout = 0;
+    questionIndex = 0;
+    loadQuestion();
+};
+
+function loadQuestion() {
+    $("#question").text(questionArray[questionIndex].question);
+    loadAnswers();
+
+    // questionIndex++;
+    // if questionIndex == questionArray.length, the final question has been loaded
+
+    qTimer();
+};
+
+function qTimer() {
+    $("#time-remain").text("Time Remaining: " + qTimeout + " seconds");
 
 };
 
-// GAME PRE-START: This section runs at pageload
+function loadAnswers() {
+    const sequence = [ 1, 2, 3, 4 ];
+    shuffle(sequence);
 
-// $(".hidden").css('visibility', 'hidden');
-// #question {
-//     background-color: rgba(0,128,0,0.25);
-//     color: white;
-//     border: 1px solid green;
-//     margin-left: 160px;
-//     margin-right: 160px;
-//     margin-bottom: 25px;
-// }
+    $("#answers").empty();
+
+    for (let i=0; i<sequence.length; i++) {
+        const displayAns = $("<h1>");
+
+        switch(sequence[i]) {
+            case 1:
+                displayAns.text(questionArray[questionIndex].answers.correct);
+                displayAns.addClass("CORRECT");
+                break;
+            case 2:
+                displayAns.text(questionArray[questionIndex].answers.wrong1);
+                break;
+            case 3:
+                displayAns.text(questionArray[questionIndex].answers.wrong2);
+                break;
+            case 4:
+                displayAns.text(questionArray[questionIndex].answers.wrong3);
+                break;
+            default:
+                alert("Error: sequence[i] not found during loadAnswers() run");
+        }
+
+        displayAns.addClass("button");
+        $("#answers").append(displayAns);
+    }
+};
+
+// performs a shuffle of the array
+function shuffle(array) {
+    let i = 0;
+    let j = 0;
+    let temp = null;
+  
+    for (i = array.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+    }
+};
+
+// START GAME: following runs upon clicking "Click here to begin!"
+$(".start-game").on("click", function() {
+    $("#question").removeClass('start-game');
+    $("#question").css('background-color', 'transparent');
+    $("#question").css('border', 'none');
+    $("#question").css('margin-left', '0');
+    $("#question").css('margin-right', '0');
+    initializeGame();
+    $(".hidden").css('visibility', 'visible');
+});
