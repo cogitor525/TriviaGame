@@ -1,18 +1,47 @@
 body {
-    background-image: url('../images/andromeda.jpg');
+    background-color: indigo;
+    /* background-image: url('../images/andromeda.jpg'); */
     background-size: cover;
 }
 
 .row {
-    border: 1px solid yellow;
     margin-top: 100px;
 }
 
 main {
-    border: 1px solid red;
+    text-align: center;
+    border: 1px solid blue;
     background-color: rgba(255,255,255,0.33);
+    padding-bottom: 25px;
 }
 
-h1, h2, p {
+#main-title {
+    font-size: 52px;
+    color: purple;
+    text-shadow: 2px 2px chartreuse;
+    margin-top: 32px;
+    margin-bottom: 43px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background-color: rgba(255,255,0,0.25);
+}
+
+#time-remain {
+    margin-bottom: 25px;
+    margin-left: 125px;
+    margin-right: 125px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: crimson;
+    background-color: rgba(0,100,0,0.33);
+}
+
+#question {
     color: white;
+    margin-bottom: 25px;
+}
+
+h1 {
+    color: white;
+    margin-bottom: 25px;
 }
