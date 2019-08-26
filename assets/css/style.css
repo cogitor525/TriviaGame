@@ -54,8 +54,12 @@ h1 {
     margin-bottom: 25px;
 }
 
+h4 {
+    color: rgb(57, 197, 240);
+}
+
 h5 {
-    color: rgb(127,255,0,0.76);
+    color: rgba(0, 255, 128, 0.76);
     margin-bottom: 25px;
 }
 

@@ -123,6 +123,17 @@ function nextQTimer() {
     }, (qInterval*1000));
 };
 
+function endGame() {
+    $("#answers").empty();
+    $("#question").text("That was the last question! Here's how you did:");
+
+    $("#answers").append($("<h4>").text("Correct answers: " + countCorrect));
+    $("#answers").append($("<h4>").text("Wrong answers: " + countWrong));
+    $("#answers").append($("<h4>").text("Timeouts: " + countTimeout));
+
+    // need to create Restart Game button & functionality
+}
+
 function loadAnswers() {
     const sequence = [ 1, 2, 3, 4 ];
     shuffle(sequence);
