@@ -3,12 +3,18 @@
 
 // these define duration of game timeouts
 const qTimeout = 10;  // 10 seconds
-const qInterval = 3;  // 3 seconds
+const qInterval = 10;  // 10 seconds
+
+// this will hold our setInterval that runs the timer
+let timerId;
 
 // these variables track the player's score/record
 let countCorrect;
 let countWrong;
 let countTimeout;
+
+let correctAnswer;
+let currentUrl;
 
 // this object contains paths to images to be used in game
 const imageUrlSet = {
@@ -58,8 +64,8 @@ function addQuestion(question,correctAnswer,wrong1Answer,wrong2Answer,wrong3Answ
 };
 
 // this section to create questionArray to be used in game
-addQuestion("Which particle mediates the EM force?","photon","electron","magneton","gluon","URL_here");
-addQuestion("Which newly developed procedure allows for precise genetic editing?","CRISpR","PCR","transcriptase","RNAi","URL_here");
+addQuestion("What particle mediates the electromagnetic force?","photon","electron","magneton","gluon","assets/images/photon.gif");
+addQuestion("Which of the following is a method of gene editing?","CRISPR","DNAse","telomerase","RNAi","assets/images/CRISPR.gif");
 addQuestion("");
 addQuestion("");
 addQuestion("");
@@ -81,6 +87,7 @@ function initializeGame() {
 };
 
 function loadQuestion() {
+    currentUrl = questionArray[questionIndex].imageUrl;
     $("#question").text(questionArray[questionIndex].question);
     loadAnswers();
 
@@ -106,7 +113,8 @@ function loadAnswers() {
 
         switch(sequence[i]) {
             case 1:
-                displayAns.text(questionArray[questionIndex].answers.correct);
+                correctAnswer = questionArray[questionIndex].answers.correct;
+                displayAns.text(correctAnswer);
                 displayAns.addClass("CORRECT");
                 break;
             case 2:
@@ -150,4 +158,24 @@ $(".start-game").on("click", function() {
     $("#question").css('margin-right', '0');
     initializeGame();
     $(".hidden").css('visibility', 'visible');
+});
+
+// ANSWER SELECTION: following runs upon clicking an answer option
+$(document.body).on("click", ".button", function() {
+    clearInterval(timerId);
+    $("#answers").empty();
+    if ($(this).hasClass("CORRECT")) {
+        $("#question").text("Correct!");
+        countCorrect++;
+    } else {
+        $("#question").text("No...");
+        countWrong++;
+        const showCorrect = $("<h5>");
+        showCorrect.text("The correct answer is: " + correctAnswer);
+        $("#answers").append(showCorrect);
+    }
+    const image = $("<img>");
+    image.attr("src", currentUrl);
+    image.css("height", "250px");
+    $("#answers").append(image);
 });
