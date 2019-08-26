@@ -1,5 +1,5 @@
 // these define duration of game timeouts
-const qTimeout = 10;  // 10 seconds
+const qTimeout = 15;  // 15 seconds
 const qInterval = 10;  // 10 seconds
 
 // this will hold our setInterval that runs the question timer
@@ -53,16 +53,14 @@ function addQuestion(question,correctAnswer,wrong1Answer,wrong2Answer,wrong3Answ
 // this section to create questionArray to be used in game
 addQuestion("What particle mediates the electromagnetic force?","photon","electron","magneton","gluon","assets/images/photon.gif");
 addQuestion("Which of the following is a method of gene editing?","CRISPR","DNAse","telomerase","RNAi","assets/images/CRISPR.gif");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
-addQuestion("");
+addQuestion("Organic compounds are defined by the presence of this element:","carbon","oxygen","nitrogen","hydrogen","assets/images/carbon.gif");
+addQuestion("Quantum mechanics describes the behavior of matter/energy on the atomic/subatomic scale. Physicists have been unable thus far to reconcile QM with which of the following four fundamental forces of nature?","gravity","strong nuclear force","electromagnetism","weak nuclear force","assets/images/gravity.gif");
+addQuestion("This ubiquitous molecular biology technique is used to generate many copies of a specific DNA segment:","polymerase chain reaction","molecular cloning","DNA microarray","oligonucleotide synthesis","assets/images/PCR.gif");
+addQuestion("The Bayer process is the principal industrial means of refining bauxite ore to extract which useful element?","aluminum","copper","iron","silver","assets/images/aluminum.gif");
+addQuestion("This previously theorized particle's existence was confirmed in 2012 from experimentation using the Large Hadron Collider:","Higgs boson","alpha particle","Z boson","tachyon","assets/images/LHC.gif");
+addQuestion("These nucleoprotein structures found at the ends of chromosomes are involved in cellular aging, and are a subject of anti-aging research:","telomeres","nucleosomes","neoantigens","genome scaffolds","assets/images/replication.gif");
+addQuestion("This is the lightest element whose isotopes are all radioactive, and nearly all of it is synthetically produced:","technetium","radon","uranium","xenon","assets/images/radiation.gif");
+addQuestion("This renowned theoretical physicist participated in the Manhattan Project to develop the atomic bomb; witnessing the first successful detonation on July 16, 1945, he later remarked that a verse from the Hindu 'Bhagavad Gita' ran through his mind: 'Now I am become Death, the destroyer of worlds'","J. Robert Oppenheimer","Edward Teller","Richard Feynman","Enrico Fermi","assets/images/atomic.gif");
 
 // this function called when starting/restarting new game
 function initializeGame() {
