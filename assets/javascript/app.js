@@ -90,16 +90,25 @@ function loadQuestion() {
     currentUrl = questionArray[questionIndex].imageUrl;
     $("#question").text(questionArray[questionIndex].question);
     loadAnswers();
-
-    // questionIndex++;
-    // if questionIndex == questionArray.length, the final question has been loaded
-
     qTimer();
 };
 
 function qTimer() {
     $("#time-remain").text("Time Remaining: " + qTimeout + " seconds");
 
+};
+
+function nextQTimer() {
+    questionIndex++;
+    // if questionIndex == questionArray.length, there are no further questions
+
+    setTimeout(function() {
+        if (questionIndex == questionArray.length) {
+            endGame();
+        } else {
+            loadQuestion();
+        }
+    }, (qInterval*1000));
 };
 
 function loadAnswers() {
@@ -178,4 +187,5 @@ $(document.body).on("click", ".button", function() {
     image.attr("src", currentUrl);
     image.css("height", "250px");
     $("#answers").append(image);
+    nextQTimer();
 });
