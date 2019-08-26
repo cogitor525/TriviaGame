@@ -1,34 +1,21 @@
-// $('body').css('background-image', "url('assets/images/andromeda.jpg')");
-
-
 // these define duration of game timeouts
 const qTimeout = 10;  // 10 seconds
 const qInterval = 10;  // 10 seconds
 
-// this will hold our setInterval that runs the timer
+// this will hold our setInterval that runs the question timer
 let timerId;
+
+// this will countdown to 0 when the question timer is running
+let timeRemain;
 
 // these variables track the player's score/record
 let countCorrect;
 let countWrong;
 let countTimeout;
 
+// these will hold the respective values of the current question loaded
 let correctAnswer;
 let currentUrl;
-
-// this object contains paths to images to be used in game
-const imageUrlSet = {
-    q1: "",
-    q2: "",
-    q3: "",
-    q4: "",
-    q5: "",
-    q6: "",
-    q7: "",
-    q8: "",
-    q9: "",
-    q10: "",
-};
 
 let questionIndex;
 const questionArray = [];
@@ -95,7 +82,20 @@ function loadQuestion() {
 
 function qTimer() {
     $("#time-remain").text("Time Remaining: " + qTimeout + " seconds");
-
+    timeRemain = qTimeout;
+    timerId = setInterval(function() {
+        timeRemain--;
+        $("#time-remain").text("Time Remaining: " + timeRemain + " seconds");
+        if (timeRemain == 1) {
+            $("#time-remain").text(function (_,txt) {
+                return txt.slice(0,-1);
+            });
+        }
+        if (timeRemain == 0) {
+            clearInterval(timerId);
+            timedOut();
+        }
+    }, 1000);
 };
 
 function nextQTimer() {
@@ -144,7 +144,7 @@ function loadAnswers() {
     }
 };
 
-// performs a shuffle of the array
+// performs a shuffle of input array
 function shuffle(array) {
     let i = 0;
     let j = 0;
@@ -159,7 +159,7 @@ function shuffle(array) {
 };
 
 // START GAME: following runs upon clicking "Click here to begin!"
-$(".start-game").on("click", function() {
+$(document.body).on("click", ".start-game", function() {
     $("#question").removeClass('start-game');
     $("#question").css('background-color', 'transparent');
     $("#question").css('border', 'none');
@@ -186,6 +186,7 @@ $(document.body).on("click", ".button", function() {
     const image = $("<img>");
     image.attr("src", currentUrl);
     image.css("height", "250px");
+    image.css("margin-bottom", "25px");
     $("#answers").append(image);
     nextQTimer();
 });
