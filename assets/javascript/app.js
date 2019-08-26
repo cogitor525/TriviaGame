@@ -1,6 +1,6 @@
 // these define duration of game timeouts
-const qTimeout = 15;  // 15 seconds
-const qInterval = 10;  // 10 seconds
+const qTimeout = 1;  // 15 seconds
+const qInterval = 1;  // 10 seconds
 
 // this will hold our setInterval that runs the question timer
 let timerId;
@@ -131,8 +131,17 @@ function endGame() {
     $("#answers").append($("<h4>").text("Wrong answers: " + countWrong));
     $("#answers").append($("<h4>").text("Timeouts: " + countTimeout));
 
-    // need to create Restart Game button & functionality
+    const restartGame = $("<h3>");
+    restartGame.text("Try again?");
+    restartGame.addClass("restart-game");
+    $("#answers").append(restartGame);
 }
+
+// RESTART GAME: following runs when .restart-game 'button' clicked
+$(document.body).on("click", ".restart-game", function() {
+    shuffle(questionArray);
+    initializeGame();
+});
 
 function loadAnswers() {
     const sequence = [ 1, 2, 3, 4 ];
