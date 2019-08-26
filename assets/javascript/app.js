@@ -1,6 +1,6 @@
 // these define duration of game timeouts
-const qTimeout = 1;  // 15 seconds
-const qInterval = 1;  // 10 seconds
+const qTimeout = 15;  // 15 seconds
+const qInterval = 10;  // 10 seconds
 
 // this will hold our setInterval that runs the question timer
 let timerId;
