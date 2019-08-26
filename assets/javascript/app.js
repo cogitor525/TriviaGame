@@ -96,6 +96,20 @@ function qTimer() {
     }, 1000);
 };
 
+function timedOut() {
+    countTimeout++;
+
+    $("#answers").empty();
+    $("#question").text("You've run out of time!");
+
+    const showCorrect = $("<h5>");
+    showCorrect.text("The correct answer is: " + correctAnswer);
+    $("#answers").append(showCorrect);
+
+    appendImg();
+    nextQTimer();
+};
+
 function nextQTimer() {
     questionIndex++;
     // if questionIndex == questionArray.length, there are no further questions
@@ -181,10 +195,14 @@ $(document.body).on("click", ".button", function() {
         showCorrect.text("The correct answer is: " + correctAnswer);
         $("#answers").append(showCorrect);
     }
+    appendImg();
+    nextQTimer();
+});
+
+function appendImg() {
     const image = $("<img>");
     image.attr("src", currentUrl);
     image.css("height", "250px");
     image.css("margin-bottom", "25px");
     $("#answers").append(image);
-    nextQTimer();
-});
+};
